@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Web Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download File</title>
 </head>
 <body>
-  <h1>Welcome!</h1>
-  <p>This is my simple web page.</p>
-  <button>Click me!</button>
+
+    <h1>Download File Example</h1>
+
+    <button id="downloadButton">Download File</button>
+
+    <script>
+        // Replace 'URL_TO_DOWNLOAD' with the actual URL of the file you want to download
+        const downloadUrl = 'https://th.bing.com/th/id/OIG.MC3PObbEmuJhfsPJ8biQ';
+
+        // Function to initiate file download
+        function downloadFile(url) {
+            const anchor = document.createElement('a');
+            anchor.href = url;
+            anchor.download = url.split('/').pop(); // Set the filename to the last part of the URL
+            anchor.click();
+        }
+
+        // Event listener for button click
+        document.getElementById('downloadButton').addEventListener('click', function() {
+            downloadFile(downloadUrl);
+        });
+    </script>
+
 </body>
 </html>
