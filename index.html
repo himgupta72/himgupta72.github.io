@@ -3,35 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download File Testing Himanshu </title>
+    <title>Download File Testing Himanshu</title>
 </head>
 <body>
 
-    <h1>Download File Example  Testing Himanshu</h1>
+    <h1>Download File Example Testing Himanshu</h1>
 
     <button id="downloadButton">Download File</button>
 
+    <!-- Include MobileDetect library -->
+    <script src="https://cdn.jsdelivr.net/npm/mobile-detect"></script>
+
     <script>
-        // Replace 'URL_TO_DOWNLOAD' with the actual URL of the file you want to download
-        const downloadUrl = 'https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?w=4128&h=3096';
+        // Function to detect platform
+        function getPlatform() {
+            const md = new MobileDetect(navigator.userAgent);
+            if (md.is('AndroidOS')) {
+                return 'Android';
+            } else if (md.is('iPhone')) {
+                return 'iOS';
+            }
+            return 'unknown';
+        }
 
         // Function to initiate file download
         function downloadFile(url) {
-      if (downloadUrl) {
-      const link = document.createElement('a');
-      link.href = downloadUrl;
- 
-      
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-
-
+            if (url) {
+                const link = document.createElement('a');
+                link.href = url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
         }
 
         // Event listener for button click
         document.getElementById('downloadButton').addEventListener('click', function() {
+            // Get platform
+            const platform = getPlatform();
+            // Replace 'URL_TO_DOWNLOAD' with the actual URL of the file you want to download
+            let downloadUrl = 'https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?w=4128&h=3096';
+            // Modify download URL based on platform
+            if (platform === 'iOS') {
+                // Modify download URL for iOS
+                console.log("Himanshu iOS");
+                downloadUrl = 'URL_FOR_IOS_DOWNLOAD';
+            } else if (platform === 'Android') {
+                console.log("Himanshu Android");
+                // Modify download URL for Android
+                downloadUrl = 'URL_FOR_ANDROID_DOWNLOAD';
+            }else{
+            console.log("Himanshu undkonwn");
+            }
+            // Initiate file download
             downloadFile(downloadUrl);
         });
     </script>
